@@ -12,6 +12,11 @@
         <input id="search">
     </div>
 
+    <div id="open"></div>
+    <div id="high"></div>
+    <div id="low"></div>
+    <div id="close"></div>
+
 </body>
 
 <script>
@@ -20,20 +25,43 @@ let searchBar = document.getElementById('search');
 searchBar.setAttribute("onkeydown", "search(this)");
 
 
-async function getData(ticker) {
-    const api_url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi`
+async function getData(symb) {
+    const api_url = `https://api.polygon.io/v2/aggs/ticker/${symb}/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi`
+    const api_url2 = `https://api.polygon.io/v3/reference/tickers/${symb}?apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi`
     const response = await fetch(api_url);
+    const response2 = await fetch(api_url2);
     var data = await response.json();
+    var data2 = await response2.json();
+
+    let ticker = data.ticker;
+    let open = data.results[0].o;
+    let high = data.results[0].h;
+    let low = data.results[0].l;
+    let close = data.results[0].c;
+    let name = data2.results.name;
+    let locale = data2.results.locale.toUpperCase();
+    let currency = data2.results.currency_name.toUpperCase();
+    let description = data2.results.description;
 
     console.log(data);
+    console.log(data2);
+    console.log(ticker);
+    console.log(open);
+    console.log(high);
+    console.log(low);
+    console.log(close);
+    console.log(name);
+    console.log(locale);
+    console.log(currency);
+    console.log(description);
 }
 
 async function search(ele) {
     if (event.key === 'Enter') {
         console.log(ele.value)
         var initial = ele.value
-        var ticker = initial.toUpperCase();
-        getData(ticker)
+        var symbol = initial.toUpperCase();
+        getData(symbol)
     }
 
 }
