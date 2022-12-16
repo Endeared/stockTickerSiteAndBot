@@ -1,4 +1,4 @@
-# stock ticker site / python bot
+# stock ticker site
 
 includes:
 - stock ticker site
