@@ -8,20 +8,35 @@
 </head>
 <body>
 
+    <div>
+        <input id="search">
+    </div>
+
 </body>
 
 <script>
 
-const api_url = "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2020-06-01/2020-06-17?apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi"
+let searchBar = document.getElementById('search');
+searchBar.setAttribute("onkeydown", "search(this)");
 
-async function getData() {
+
+async function getData(ticker) {
+    const api_url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi`
     const response = await fetch(api_url);
     var data = await response.json();
 
     console.log(data);
 }
 
-getData();
+async function search(ele) {
+    if (event.key === 'Enter') {
+        console.log(ele.value)
+        var initial = ele.value
+        var ticker = initial.toUpperCase();
+        getData(ticker)
+    }
+
+}
 
 </script>
 </html>
