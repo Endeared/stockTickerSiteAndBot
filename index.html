@@ -1,118 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="index.js"></script>
-    <link rel="stylesheet" src="indexStyle.css">
-    <title>Document</title>
+    <script type="module" src="index.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="indexStyle.css">
+    <title>Ross' Stocker Bot</title>
 </head>
 
 <style>
-
-body {
-    background-color: rgb(51, 51, 57);
-    color: white;
-    font-family: 'Calibri';
-    font-weight: 600;
-    margin: 0;
-    overflow: hidden;
-}
-
-.cont {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.search {
-    background-color: rgb(62, 62, 68);
-    width: 100vw;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    text-shadow: 0px 5px 0px rgba(0, 0, 0, 0.489);
-}
-
-#search {
-    text-align: center;
-    background-color: grey;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.489);
-}
-
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgb(255, 255, 255);
-  opacity: 1; /* Firefox */
-  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.489);
-}
-
-.main {
-    margin-top: 10vh;
-    width: 50%;
-}
-
-.firstRow, .secondRow {
-    display: flex;
-    justify-content: center;
-}
-
-.searchText {
-    font-size: 3rem;
-    margin-bottom: 1vh;
-}
-
-#ticker, #name, #locale, #currency {
-    margin-right: 1vw;
-    margin-left: 1vw;
-}
-
-.footer {
-    position: absolute;
-    top: 95%;
-    background-color: rgb(62, 62, 68);
-    width: 100vw;
-    padding-bottom: 2vh;
-    padding-top: 2vh;
-    text-shadow: 0px 3px 0px rgba(0, 0, 0, 0.489);
-}
-
-#endeared {
-    text-decoration: none;
-    color: rgb(195, 195, 195);
-}
-
-#ticker {
-    font-size: 3rem;
-    text-shadow: 0px 5px 0px rgba(0, 0, 0, 0.489);
-    margin-bottom: 1vh;
-}
-
-#locale, #currency {
-    font-size: 2rem;
-    text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.489);
-    margin-bottom: 1vh;
-}
-
-#description {
-    margin-top: 1vh;
-    font-style: italic;
-    margin-bottom: 2vh;
-    font-weight: 300;
-    text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.489);
-}
-
-#open, #high, #low, #close {
-    font-size: 1.5rem;
-    text-shadow: 0px 3px 0px rgba(0, 0, 0, 0.489);
-}
 
 
 </style>
@@ -120,6 +18,7 @@ body {
 <body>
 
     <div class="cont">
+
         <div class="search">
             <div class="searchText">SEARCH TICKER HERE</div>
             <input id="search" placeholder="Input a ticker!">
@@ -146,84 +45,5 @@ body {
 
     </div>
 
-
-
 </body>
-
-<script>
-
-let tickerDiv = document.getElementById('ticker');
-let openDiv = document.getElementById('open');
-let highDiv = document.getElementById('high');
-let lowDiv = document.getElementById('low');
-let closeDiv = document.getElementById('close');
-let nameDiv = document.getElementById('name');
-let localeDiv = document.getElementById('locale');
-let currencyDiv = document.getElementById('currency');
-let descriptionDiv = document.getElementById('description');
-
-let searchBar = document.getElementById('search');
-searchBar.setAttribute("onkeydown", "search(this)");
-
-
-async function getData(symb) {
-    const api_url = `https://api.polygon.io/v2/aggs/ticker/${symb}/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi`
-    const api_url2 = `https://api.polygon.io/v3/reference/tickers/${symb}?apiKey=zuwnlARh8tmPmFfs_1JhhFI8ukuB8Cpi`
-    const response = await fetch(api_url);
-    const response2 = await fetch(api_url2);
-    var data = await response.json();
-    var data2 = await response2.json();
-
-    let ticker = data.ticker;
-    let open = data.results[0].o;
-    let high = data.results[0].h;
-    let low = data.results[0].l;
-    let close = data.results[0].c;
-    let name = data2.results.name;
-    let locale = data2.results.locale.toUpperCase();
-    let currency = data2.results.currency_name.toUpperCase();
-    let description = data2.results.description;
-
-    tickerDiv.innerHTML = ticker + " - " + name;
-    openDiv.innerHTML += "OPEN: " + open;
-    highDiv.innerHTML += "HIGH: " + high;
-    lowDiv.innerHTML += "LOW: " + low;
-    closeDiv.innerHTML += "CLOSE: " + close;
-    localeDiv.innerHTML += "Locale: " + locale;
-    currencyDiv.innerHTML += "Currency: " + currency;
-    descriptionDiv.innerHTML = `" ${description} "`;
-
-    console.log(data);
-    console.log(data2);
-    console.log(ticker);
-    console.log(open);
-    console.log(high);
-    console.log(low);
-    console.log(close);
-    console.log(name);
-    console.log(locale);
-    console.log(currency);
-    console.log(description);
-}
-
-async function search(ele) {
-    if (event.key === 'Enter') {
-
-        tickerDiv.innerHTML = ""
-        openDiv.innerHTML = ""
-        highDiv.innerHTML = ""
-        lowDiv.innerHTML = ""
-        closeDiv.innerHTML = ""
-        localeDiv.innerHTML = ""
-        currencyDiv.innerHTML = ""
-        descriptionDiv.innerHTML = ""
-        console.log(ele.value)
-        var initial = ele.value
-        var symbol = initial.toUpperCase();
-        getData(symbol)
-    }
-
-}
-
-</script>
 </html>
