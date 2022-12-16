@@ -6,21 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
+<style>
+
+.cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.search {
+    margin-top: 5vh;
+}
+
+.main {
+    margin-top: 10vh;
+    width: 70%;
+}
+
+.firstRow, .secondRow {
+    display: flex;
+    justify-content: center;
+}
+
+#ticker, #name, #locale, #currency {
+    margin-right: 1vw;
+    margin-left: 1vw;
+}
+
+</style>
+
 <body>
 
-    <div>
-        <input id="search">
+    <div class="cont">
+        <div class="search">
+            <div class="searchText">INPUT SEARCH HERE</div>
+            <input id="search">
+        </div>
+
+        <div class="main">
+            <div class="firstRow">
+                <div id="ticker"></div>
+                <div id="name"></div>
+            </div>
+            <div class="secondRow">
+                <div id="locale">Locale: </div>
+                <div id="currency">Currency: </div>
+            </div>
+            <div id="description"></div>
+            <div id="open">Open: </div>
+            <div id="high">High: </div>
+            <div id="low">Low: </div>
+            <div id="close">Close: </div>
+        </div>
+
     </div>
 
-    <div id="ticker"></div>
-    <div id="open"></div>
-    <div id="high"></div>
-    <div id="low"></div>
-    <div id="close"></div>
-    <div id="name"></div>
-    <div id="locale"></div>
-    <div id="currency"></div>
-    <div id="description"></div>
+
 
 </body>
 
@@ -59,13 +103,13 @@ async function getData(symb) {
     let description = data2.results.description;
 
     tickerDiv.innerHTML = ticker;
-    openDiv.innerHTML = open;
-    highDiv.innerHTML = high;
-    lowDiv.innerHTML = low;
-    closeDiv.innerHTML = close;
+    openDiv.innerHTML += open;
+    highDiv.innerHTML += high;
+    lowDiv.innerHTML += low;
+    closeDiv.innerHTML += close;
     nameDiv.innerHTML = name;
-    localeDiv.innerHTML = locale;
-    currencyDiv.innerHTML = currency;
+    localeDiv.innerHTML += locale;
+    currencyDiv.innerHTML += currency;
     descriptionDiv.innerHTML = description;
 
     console.log(data);
