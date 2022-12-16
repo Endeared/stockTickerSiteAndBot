@@ -9,7 +9,7 @@ let currencyDiv = document.getElementById('currency');
 let descriptionDiv = document.getElementById('description');
 
 let searchBar = document.getElementById('search');
-searchBar.setAttribute("onkeydown", "search(this)");
+searchBar.setAttribute("onkeydown", "check(this)");
 
 
 async function getData(symb) {
@@ -52,7 +52,7 @@ async function getData(symb) {
     console.log(description);
 }
 
-async function search(ele) {
+function check(ele) {
     if (event.key === 'Enter') {
 
         tickerDiv.innerHTML = ""
@@ -68,5 +68,4 @@ async function search(ele) {
         var symbol = initial.toUpperCase();
         getData(symbol)
     }
-
 }
