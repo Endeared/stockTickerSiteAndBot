@@ -12,14 +12,29 @@
         <input id="search">
     </div>
 
+    <div id="ticker"></div>
     <div id="open"></div>
     <div id="high"></div>
     <div id="low"></div>
     <div id="close"></div>
+    <div id="name"></div>
+    <div id="locale"></div>
+    <div id="currency"></div>
+    <div id="description"></div>
 
 </body>
 
 <script>
+
+let tickerDiv = document.getElementById('ticker');
+let openDiv = document.getElementById('open');
+let highDiv = document.getElementById('high');
+let lowDiv = document.getElementById('low');
+let closeDiv = document.getElementById('close');
+let nameDiv = document.getElementById('name');
+let localeDiv = document.getElementById('locale');
+let currencyDiv = document.getElementById('currency');
+let descriptionDiv = document.getElementById('description');
 
 let searchBar = document.getElementById('search');
 searchBar.setAttribute("onkeydown", "search(this)");
@@ -42,6 +57,16 @@ async function getData(symb) {
     let locale = data2.results.locale.toUpperCase();
     let currency = data2.results.currency_name.toUpperCase();
     let description = data2.results.description;
+
+    tickerDiv.innerHTML = ticker;
+    openDiv.innerHTML = open;
+    highDiv.innerHTML = high;
+    lowDiv.innerHTML = low;
+    closeDiv.innerHTML = close;
+    nameDiv.innerHTML = name;
+    localeDiv.innerHTML = locale;
+    currencyDiv.innerHTML = currency;
+    descriptionDiv.innerHTML = description;
 
     console.log(data);
     console.log(data2);
