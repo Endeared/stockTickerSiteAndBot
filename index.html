@@ -9,6 +9,14 @@
 
 <style>
 
+body {
+    background-color: rgb(51, 51, 57);
+    color: white;
+    font-family: 'Calibri';
+    font-weight: 600;
+    margin: 0;
+}
+
 .cont {
     display: flex;
     flex-direction: column;
@@ -18,7 +26,29 @@
 }
 
 .search {
-    margin-top: 5vh;
+    background-color: rgb(62, 62, 68);
+    width: 100vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    text-shadow: 0px 5px 0px rgba(0, 0, 0, 0.489);
+}
+
+#search {
+    text-align: center;
+    background-color: grey;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.489);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(255, 255, 255);
+  opacity: 1; /* Firefox */
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.489);
 }
 
 .main {
@@ -29,6 +59,11 @@
 .firstRow, .secondRow {
     display: flex;
     justify-content: center;
+}
+
+.searchText {
+    font-size: 3rem;
+    margin-bottom: 1vh;
 }
 
 #ticker, #name, #locale, #currency {
@@ -42,24 +77,23 @@
 
     <div class="cont">
         <div class="search">
-            <div class="searchText">INPUT SEARCH HERE</div>
-            <input id="search">
+            <div class="searchText">SEARCH TICKER HERE</div>
+            <input id="search" placeholder="Input a ticker!">
         </div>
 
         <div class="main">
             <div class="firstRow">
                 <div id="ticker"></div>
-                <div id="name"></div>
             </div>
             <div class="secondRow">
-                <div id="locale">Locale: </div>
-                <div id="currency">Currency: </div>
+                <div id="locale"></div>
+                <div id="currency"></div>
             </div>
             <div id="description"></div>
-            <div id="open">Open: </div>
-            <div id="high">High: </div>
-            <div id="low">Low: </div>
-            <div id="close">Close: </div>
+            <div id="open"></div>
+            <div id="high"></div>
+            <div id="low"></div>
+            <div id="close"></div>
         </div>
 
     </div>
@@ -102,14 +136,13 @@ async function getData(symb) {
     let currency = data2.results.currency_name.toUpperCase();
     let description = data2.results.description;
 
-    tickerDiv.innerHTML = ticker;
-    openDiv.innerHTML += open;
-    highDiv.innerHTML += high;
-    lowDiv.innerHTML += low;
-    closeDiv.innerHTML += close;
-    nameDiv.innerHTML = name;
-    localeDiv.innerHTML += locale;
-    currencyDiv.innerHTML += currency;
+    tickerDiv.innerHTML = ticker + " - " + name;
+    openDiv.innerHTML += "Open: " + open;
+    highDiv.innerHTML += "High: " + high;
+    lowDiv.innerHTML += "Low " + low;
+    closeDiv.innerHTML += "Close " + close;
+    localeDiv.innerHTML += "Locale: " + locale;
+    currencyDiv.innerHTML += "Currency: " + currency;
     descriptionDiv.innerHTML = description;
 
     console.log(data);
@@ -127,6 +160,15 @@ async function getData(symb) {
 
 async function search(ele) {
     if (event.key === 'Enter') {
+
+        tickerDiv.innerHTML = ""
+        openDiv.innerHTML = ""
+        highDiv.innerHTML = ""
+        lowDiv.innerHTML = ""
+        closeDiv.innerHTML = ""
+        localeDiv.innerHTML = ""
+        currencyDiv.innerHTML = ""
+        descriptionDiv.innerHTML = ""
         console.log(ele.value)
         var initial = ele.value
         var symbol = initial.toUpperCase();
