@@ -4,7 +4,7 @@ body {
     font-family: 'Calibri';
     font-weight: 600;
     margin: 0;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .cont {
@@ -43,7 +43,7 @@ body {
 
 .main {
     margin-top: 10vh;
-    width: 50%;
+    max-width: 50%;
 }
 
 .firstRow, .secondRow {
@@ -61,8 +61,12 @@ body {
     margin-left: 1vw;
 }
 
+#close {
+    margin-bottom: 10vh;
+}
 .footer {
-    position: absolute;
+    position: fixed;
+    bottom: 0;
     top: 95%;
     background-color: rgb(62, 62, 68);
     width: 100vw;
