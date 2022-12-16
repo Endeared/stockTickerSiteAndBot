@@ -54,7 +54,7 @@ body {
 
 .main {
     margin-top: 10vh;
-    width: 70%;
+    width: 50%;
 }
 
 .firstRow, .secondRow {
@@ -90,6 +90,26 @@ body {
 #ticker {
     font-size: 3rem;
     text-shadow: 0px 5px 0px rgba(0, 0, 0, 0.489);
+    margin-bottom: 1vh;
+}
+
+#locale, #currency {
+    font-size: 2rem;
+    text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.489);
+    margin-bottom: 1vh;
+}
+
+#description {
+    margin-top: 1vh;
+    font-style: italic;
+    margin-bottom: 2vh;
+    font-weight: 300;
+    text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.489);
+}
+
+#open, #high, #low, #close {
+    font-size: 1.5rem;
+    text-shadow: 0px 3px 0px rgba(0, 0, 0, 0.489);
 }
 
 
@@ -163,13 +183,13 @@ async function getData(symb) {
     let description = data2.results.description;
 
     tickerDiv.innerHTML = ticker + " - " + name;
-    openDiv.innerHTML += "Open: " + open;
-    highDiv.innerHTML += "High: " + high;
-    lowDiv.innerHTML += "Low " + low;
-    closeDiv.innerHTML += "Close " + close;
+    openDiv.innerHTML += "OPEN: " + open;
+    highDiv.innerHTML += "HIGH: " + high;
+    lowDiv.innerHTML += "LOW: " + low;
+    closeDiv.innerHTML += "CLOSE: " + close;
     localeDiv.innerHTML += "Locale: " + locale;
     currencyDiv.innerHTML += "Currency: " + currency;
-    descriptionDiv.innerHTML = description;
+    descriptionDiv.innerHTML = `" ${description} "`;
 
     console.log(data);
     console.log(data2);
