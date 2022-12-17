@@ -10,6 +10,7 @@ from discord.ext import commands
 from discord.utils import get
 
 
+
 ctypes.windll.kernel32.SetConsoleTitleW("StockTicker")
 
 
@@ -73,7 +74,6 @@ async def info(ctx, stock):
                     inline=True)
 
     await ctx.send(embed=embed)
-
 
 
 bot.run('TOKEN_GOES_HERE')
